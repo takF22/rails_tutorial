@@ -14,9 +14,9 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: tVkski<JX1t
+  password: Takaoka!!00
   socket: /var/lib/mysql/mysql.sock
- # host: 127.0.0.1
+  # host: 127.0.0.1
 
 development:
   <<: *default
@@ -53,6 +53,6 @@ test:
 production:
   <<: *default
   database: rails_tutorial_production
-  username: rails_tutorial
+  username: root
   password: <%= ENV['RAILS_TUTORIAL_DATABASE_PASSWORD'] %>
 #  host: 127.0.0.1
