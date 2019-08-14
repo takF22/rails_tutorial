@@ -1,2 +1,15 @@
-<h1>Blogs#show</h1>
-<p>Find me in app/views/blogs/show.html.erb</p>
+<h1 class="title">記事詳細</h1>
+<div class ="container">
+記事ID.<%= @blog.id %><br>
+タイトル：<%= @blog.title %><br>
+内容: <%= @blog.content %><br>
+筆者： <%=  @user.name %>
+<br>
+<%= link_to "編集", edit_blog_path,class:"btn btn-info" %>
+<%= link_to "削除",
+ blog_path,
+ method: :delete,
+ class:"btn btn-danger",
+ data: {confirm: "本当に削除しますか？"} %>
+</div>
+<div><%= link_to "戻る", blogs_path, class:"btn btn-link" %></div>

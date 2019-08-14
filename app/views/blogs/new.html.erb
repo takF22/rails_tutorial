@@ -1,2 +1,20 @@
-<h1>Blogs#new</h1>
-<p>Find me in app/views/blogs/new.html.erb</p>
+<h1 class="title">新規投稿</h1>
+<div class="conatiner w-75 p-3">
+<%= render 'layouts/flash_messages' %>
+<%= form_for (@blog) do |f| %>
+    <p class="text-secondary">
+      <%= f.label :title, "タイトル" %><br>
+      <%= f.text_field :title %>
+    </p>
+   
+    <p class="text-secondary">
+      <%= f.label :content, "内容" %><br>
+      <%= f.text_area :content, cols: 60, rows: 8 %>
+    </p>
+   
+    <p>
+    <%= f.submit "投稿する", :class=>"btn btn-primary" %>
+    </p>
+  <% end %>
+  </div>
+  <div><%= link_to "戻る", blogs_path, class:"btn btn-link" %></div>

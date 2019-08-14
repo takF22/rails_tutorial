@@ -1,2 +1,23 @@
-<h1>Blogs#index</h1>
-<p>Find me in app/views/blogs/index.html.erb</p>
+<h1 class="title">トップページ</h1>
+<div class="container w-75 p-3">
+<%= render 'layouts/flash_messages' %>
+<h2>
+記事一覧
+</h2>
+<table class="table table-hover">
+<thead>
+<tr>
+<th>ID</th>
+<th>タイトル</th>
+</tr>
+</thead>
+<tbody>
+<% @blogs.each do |blog| %>
+    <tr>
+     <th scope="row"><%= blog.id %></th>
+    <td><%= link_to blog.title, blog_path(blog.id) %></td>
+    </tr>
+    </tbody>
+    <% end %>
+    </table>
+    </div>

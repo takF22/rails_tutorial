@@ -1,2 +1,20 @@
-<h1>Blogs#edit</h1>
-<p>Find me in app/views/blogs/edit.html.erb</p>
+<h1 class="title">記事編集</h1>
+<div class="conatiner w-75 p-3">
+<%= render 'layouts/flash_messages' %>
+<%= form_for @blog, url:blog_path(@blog) do |f| %>
+    <p class="text-secondary">
+      <%= f.label :title, "タイトル" %><br>
+      <%= f.text_field :title %>
+    </p>
+   
+    <p class="text-secondary">
+      <%= f.label :content, "内容" %><br>
+      <%= f.text_area :content, cols: 60, rows: 8 %>
+    </p>
+   
+    <p>
+    <input type="submit" value="送信" class="btn btn-primary">
+    </p>
+  <% end %>
+  </div>
+  <div><%= link_to "戻る", blogs_path, class:"btn btn-link" %></div>

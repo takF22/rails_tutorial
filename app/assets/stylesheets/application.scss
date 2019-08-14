@@ -10,6 +10,26 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
+.title{
+    text-align: center
+}
+.indextable th{
+    background :#008080;
+    border:solid 1px #CCC;
+    color: #fff;
+    padding: 5px;
+    margin: 5px;
+    text-align: center
+}
+.indextable td{
+    background :#e6e6fa;
+    border:solid 1px #CCC;
+    padding: 5px;
+    text-align: center
+}
+.header_link {
+    padding: 5px 10px;
+}

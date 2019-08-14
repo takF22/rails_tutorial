@@ -1,15 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RailsTutorial</title>
+    <title>ブログアプリ</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
+    <![endif]-->
   </head>
 
   <body>
+  <header class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="conatiner">
+  <%= link_to "sample app", '#' %>
+  <nav>
+      <ul class="navbar-nav mr-auto">
+        <li class="header_link"><%= link_to_unless_current "記事一覧", blogs_path %></li>
+        <li class="header_link"><%= link_to_unless_current "記事投稿", '/blogs/new' %></li>
+        
+        <% if user_signed_in? %>
+        <li class="header_link"><%= link_to_unless_current "ログアウト", destroy_user_session_path, method: :delete %></li>
+        <li class="header_link text-info "><%= current_user.name %>でログイン中</li>
+        <% else %>
+        <li class="header_link"><%= link_to_unless_current "ログイン", new_user_session_path %></li>
+        <li class="header_link"><%= link_to_unless_current "新規登録", new_user_registration_path %></li>
+        <% end %>
+        
+      </ul>
+    </nav>
+  </div>
+  </header>
+  <p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>

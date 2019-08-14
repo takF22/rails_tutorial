@@ -1,0 +1,11 @@
+<% flash.each do |message_type, message| %>
+  <% if message_type == "success" %>
+    <div class="time-limit text-success">
+      <%= message %>
+    </div>
+  <% elsif message_type == "danger" %>
+  <div class="time-limit text-danger">
+      <%= message %>
+      </div>
+<% end %>
+<% end %>
