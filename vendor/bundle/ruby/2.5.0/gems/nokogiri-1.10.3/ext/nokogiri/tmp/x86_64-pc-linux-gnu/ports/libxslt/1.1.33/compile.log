@@ -1,0 +1,42 @@
+make  all-recursive
+make[1]: Entering directory `/home/vagrant/www/rails_tutorial/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxslt/1.1.33/libxslt-1.1.33'
+Making all in libxslt
+make[2]: Entering directory `/home/vagrant/www/rails_tutorial/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxslt/1.1.33/libxslt-1.1.33/libxslt'
+  CC       attrvt.lo
+  CC       xslt.lo
+  CC       xsltlocale.lo
+  CC       xsltutils.lo
+  CC       pattern.lo
+  CC       templates.lo
+  CC       variables.lo
+  CC       keys.lo
+  CC       numbers.lo
+  CC       extensions.lo
+  CC       extra.lo
+  CC       functions.lo
+  CC       namespaces.lo
+  CC       imports.lo
+  CC       attributes.lo
+  CC       documents.lo
+  CC       preproc.lo
+  CC       transform.lo
+  CC       security.lo
+  CCLD     libxslt.la
+make[2]: Leaving directory `/home/vagrant/www/rails_tutorial/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxslt/1.1.33/libxslt-1.1.33/libxslt'
+Making all in libexslt
+make[2]: Entering directory `/home/vagrant/www/rails_tutorial/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxslt/1.1.33/libxslt-1.1.33/libexslt'
+  CC       exslt.lo
+  CC       common.lo
+  CC       crypto.lo
+  CC       math.lo
+  CC       sets.lo
+  CC       functions.lo
+  CC       strings.lo
+  CC       date.lo
+  CC       saxon.lo
+  CC       dynamic.lo
+  CCLD     libexslt.la
+make[2]: Leaving directory `/home/vagrant/www/rails_tutorial/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxslt/1.1.33/libxslt-1.1.33/libexslt'
+Making all in xsltproc
+make[2]: Entering directory `/home/vagrant/www/rails_tutorial/vendor/bundle/ruby/2.5.0/gems/nokogiri-1.10.3/ext/nokogiri/tmp/x86_64-pc-linux-gnu/ports/libxslt/1.1.33/libxslt-1.1.33/xsltproc'
+  CC       xsltproc.o

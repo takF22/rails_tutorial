@@ -184,3 +184,48 @@ configure: WARNING: Disabling plugin support.
 configure: WARNING: Plugins require that shared libraries be built.
 checking that generated files are newer than configure... done
 configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating libxslt.pc
+config.status: creating libexslt.pc
+config.status: creating libxslt/Makefile
+config.status: creating libxslt/xsltconfig.h
+config.status: creating libxslt/xsltwin32config.h
+config.status: creating libexslt/Makefile
+config.status: creating libexslt/exsltconfig.h
+config.status: creating xsltproc/Makefile
+config.status: creating python/Makefile
+config.status: creating python/tests/Makefile
+config.status: creating tests/Makefile
+config.status: creating tests/docs/Makefile
+config.status: creating tests/REC1/Makefile
+config.status: creating tests/REC2/Makefile
+config.status: creating tests/REC/Makefile
+config.status: creating tests/general/Makefile
+config.status: creating tests/reports/Makefile
+config.status: creating tests/extensions/Makefile
+config.status: creating tests/namespaces/Makefile
+config.status: creating tests/keys/Makefile
+config.status: creating tests/numbers/Makefile
+config.status: creating tests/documents/Makefile
+config.status: creating tests/xmlspec/Makefile
+config.status: creating tests/multiple/Makefile
+config.status: creating tests/xinclude/Makefile
+config.status: creating tests/XSLTMark/Makefile
+config.status: creating tests/docbook/Makefile
+config.status: creating tests/exslt/Makefile
+config.status: creating tests/exslt/common/Makefile
+config.status: creating tests/exslt/functions/Makefile
+config.status: creating tests/exslt/math/Makefile
+config.status: creating tests/exslt/saxon/Makefile
+config.status: creating tests/exslt/sets/Makefile
+config.status: creating tests/exslt/strings/Makefile
+config.status: creating tests/exslt/date/Makefile
+config.status: creating tests/exslt/dynamic/Makefile
+config.status: creating tests/exslt/crypto/Makefile
+config.status: creating tests/plugins/Makefile
+config.status: creating doc/Makefile
+config.status: creating xslt-config
+config.status: creating libxslt.spec
+config.status: creating config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
