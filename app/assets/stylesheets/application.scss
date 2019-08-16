@@ -33,3 +33,79 @@
 .header_link {
     padding: 5px 10px;
 }
+.description {
+    color: dimgrey;
+    font-size: 10px;
+}
+.comment {
+    font-size: 10px;
+}
+li {
+    list-style: none;
+}
+.idtable{
+    width: 50px;
+}
+.datetable{
+    width: 100px;
+}
+.taitoru{
+    padding: 0.5em;/*文字周りの余白*/
+    color: #494949;/*文字色*/
+    background: #fffaf4;/*背景色*/
+    border-left: solid 5px #ffaf58;/*左線（実線 太さ 色）*/
+}
+.naiyou{
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #5d627b;
+    background: white;
+    border-top: solid 5px #5d627b;
+    border-bottom: solid 1px #5d627b;
+}
+#img_field {
+    font-size: 15px;
+    margin-top: 10px;
+    padding: 5px 8px;
+    border: solid 1px #EDBC6C;
+    color: #666;
+    position: relative;
+    padding: 0;
+    cursor: pointer;
+    width: 400px;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #fff;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: 0.3s ease-out;
+  }
+  
+  #img_field i {
+    font-size: 100px;
+    color: #aaa;
+    line-height: 250px;
+    transition: 0.3s ease-out;
+  }
+  
+  #img_field i.add {
+    display: none;
+    font-size: 50px;
+    position: absolute;
+    top: -90px;
+    right: 15px;
+  }
+  
+  #img_field:hover {
+    background-color: #EDBC6C;
+    transition: 0.3s ease-out;
+    opacity: 0.9;
+  }
+  
+  #img_field:hover i {
+    transition: 0.3s ease-out;
+    display: block;
+    color: #fff;
+  }

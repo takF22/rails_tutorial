@@ -11,7 +11,12 @@
       <%= f.label :content, "内容" %><br>
       <%= f.text_area :content, cols: 60, rows: 8 %>
     </p>
-   
+
+    <p class="text-secondary">
+    <%= f.label :画像 %><br>
+    <%= f.file_field :img %>
+    </p>
+    <p><%= f.check_box :remove_img %>画像を削除する</p>
     <p>
     <input type="submit" value="送信" class="btn btn-primary">
     </p>

@@ -4,20 +4,37 @@
 <h2>
 記事一覧
 </h2>
+<%= search_form_for @q  do |f| %>
+  <div class="input-group col-4">
+    <%= f.search_field :title_cont, placeholder: "タイトル(部分一致)", :class=>"form-control" %>
+    <%= f.submit "検索", :class=> "input-group-append btn btn-success" %>
+  </div>
+<% end %>
+<% if @blogs.any? %>
 <table class="table table-hover">
 <thead>
 <tr>
 <th>ID</th>
 <th>タイトル</th>
+<th>内容</th>
+<th>更新日時</th>
+<th>投稿者</th>
 </tr>
 </thead>
 <tbody>
 <% @blogs.each do |blog| %>
     <tr>
-     <th scope="row"><%= blog.id %></th>
-    <td><%= link_to blog.title, blog_path(blog.id) %></td>
+     <th scope="row" class="idtable"><%= blog.id %></th>
+    <td><%= link_to blog.title.truncate(20), blog_path(blog.id) %></td>
+    <td><%= link_to blog.content.truncate(20), blog_path(blog.id) %></td>
+    <td class="datetable"><div class="comment"><%= blog.updated_at.to_s(:datetime) %></div></td>
+    <td><%= blog.user.name %></td>
     </tr>
     </tbody>
     <% end %>
+    <% else %>
+ 検索結果はありません。
+    <% end %>
     </table>
+    <%= paginate(@blogs) %>
     </div>

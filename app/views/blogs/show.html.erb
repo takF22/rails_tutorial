@@ -1,15 +1,64 @@
 <h1 class="title">記事詳細</h1>
 <div class ="container">
-記事ID.<%= @blog.id %><br>
-タイトル：<%= @blog.title %><br>
-内容: <%= @blog.content %><br>
-筆者： <%=  @user.name %>
-<br>
+<div align="right">記事ナンバー:<%= @blog.id %></div>
+<div class="taitoru"><h2><%= @blog.title %></h2></div>
+<div class="naiyou"><%= @blog.content %></div>
+<div><%= image_tag @blog.img.url if @blog.img? %></div>
+<div align="right">投稿者：<%= @user.name %></div>
+
+<% if @blog.user_id  == current_user.id.to_s %>
 <%= link_to "編集", edit_blog_path,class:"btn btn-info" %>
 <%= link_to "削除",
  blog_path,
  method: :delete,
  class:"btn btn-danger",
  data: {confirm: "本当に削除しますか？"} %>
+ <% end %>
+</div><br><br>
+<% #コメントがあったら %>
+<table class="table container">
+<% if @comments.any? %>
+<thead>
+<tr>
+<th>コメント</th>
+<th>投稿日時</th>
+<th>投稿者</th>
+<th></th>
+</tr>
+</thead>
+<tbody class="comment">
+    <% @comments.includes(:user).each do |comment| %>
+        <% #コメントの内容 %>
+        <tr>
+        <td><%= comment.body %></td>
+        <td><%= comment.updated_at %></td>
+        <td><%= comment.user.name %></td>
+        <td>
+          <% if @blog.user_id  == current_user.id.to_s || comment.user_id  == current_user.id %>
+          <%= link_to "削除",
+          blog_comment_path(@blog, comment),
+          method: :delete,
+          class:"btn btn-danger",
+          data: {confirm: "本当に削除しますか？"} %>
+          <% end %>
+        </td>
+ <% end %>
+    <% else %>
+    コメントはありません
+<% end %>
+</tr>
+</tbody>
+</table>
+<div class="container"><%= paginate(@comments) %></div>
+<div class="container">
+<h5>コメントを追加する</h5>
+<%= form_for ([@blog, @blog.comments.build]) do |f| %>
+      <%= f.text_area :body, cols: 60, rows: 5 %>
+      <%= f.hidden_field :blog_id, :value => @blog.id %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+    <p>
+    <%= f.submit "コメントする", :class=>"btn btn-primary" %>
+    </p>
+  <% end %>
+<%= link_to "戻る", blogs_path, class:"btn btn-link" %>
 </div>
-<div><%= link_to "戻る", blogs_path, class:"btn btn-link" %></div>

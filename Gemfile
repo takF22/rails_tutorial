@@ -66,3 +66,8 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'devise'
 gem 'pry-byebug', group: :development
+gem 'rails-i18n', '~> 5.1'
+gem 'ransack'
+gem 'kaminari'
+gem 'carrierwave'
+gem 'mini_magick'
