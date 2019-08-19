@@ -25,6 +25,7 @@ class BlogsController < ApplicationController
 
   def create
     @blog = Blog.new(blog_new_params)
+    #binding.pry
     if @blog.save
     # indexアクションへオプション(一時的なメッセージ)付きでリダイレクト
     flash[:success] = "記事を投稿しました"

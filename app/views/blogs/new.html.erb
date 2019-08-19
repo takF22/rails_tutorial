@@ -14,16 +14,16 @@
     <p class="text-secondary">
   
     <%= f.label :画像 %><br>
-    <div id="img_field" onClick="$('#file').click()" >
+    <div id="img_field", style: "word-wrap: break-word;" onClick="$('#file').click()" >
     <% if @blog.img.url.present? %>
     <%= image_tag(@blog.img.url) %>
         <% else %>
-        <i class="fas fa-image"></i><i class="fas fa-file-upload add"></i>
+        <i class="fa-image">クリックして画像を追加</i><i class=" fa-file-upload add"></i>
         <% end %>
     </div>
-
-    <%= f.file_field :img, class: "image", style: "display:none;", id: 'file'%>
+    <%= f.file_field :img, style: "display:none;", id: 'file'%>
     </p>
+    <p class="comment">拡張子はjpg、jpeg、gif、pngのみ可能です。サイズ上限：3MB</p>
     <p><%= f.check_box :remove_img %>画像を削除する</p>
     <p>
     <%= f.submit "投稿する", :class=>"btn btn-primary" %>

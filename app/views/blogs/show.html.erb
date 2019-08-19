@@ -12,7 +12,7 @@
  blog_path,
  method: :delete,
  class:"btn btn-danger",
- data: {confirm: "本当に削除しますか？"} %>
+ data: {confirm: "この記事を本当に削除しますか？"} %>
  <% end %>
 </div><br><br>
 <% #コメントがあったら %>
@@ -26,12 +26,12 @@
 <th></th>
 </tr>
 </thead>
-<tbody class="comment">
+<tbody>
     <% @comments.includes(:user).each do |comment| %>
         <% #コメントの内容 %>
         <tr>
-        <td><%= comment.body %></td>
-        <td><%= comment.updated_at %></td>
+        <td class="comcontainer"><%= comment.body %><%= comment.updated_at.to_s(:datetime) %></td>
+        <td class="comment"><%= comment.updated_at.to_s(:datetime) %></td>
         <td><%= comment.user.name %></td>
         <td>
           <% if @blog.user_id  == current_user.id.to_s || comment.user_id  == current_user.id %>
@@ -39,12 +39,12 @@
           blog_comment_path(@blog, comment),
           method: :delete,
           class:"btn btn-danger",
-          data: {confirm: "本当に削除しますか？"} %>
+          data: {confirm: "コメントを削除します"} %>
           <% end %>
         </td>
  <% end %>
     <% else %>
-    コメントはありません
+    <div class="container">コメントはありません</div>
 <% end %>
 </tr>
 </tbody>
