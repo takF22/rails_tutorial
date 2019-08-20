@@ -1,40 +1,47 @@
 <h1 class="title">トップページ</h1>
-<div class="container w-75 p-3">
-<%= render 'layouts/flash_messages' %>
-<h2>
-記事一覧
-</h2>
+<div class="container-fluid">
+<div class="searchcard">
 <%= search_form_for @q  do |f| %>
-  <div class="input-group col-4">
-    <%= f.search_field :title_cont, placeholder: "タイトル(部分一致)", :class=>"form-control" %>
-    <%= f.submit "検索", :class=> "input-group-append btn btn-success" %>
+  <div class="input-group"><%= f.search_field :title_cont, placeholder: "タイトル(部分一致)", :class=>"form-control form-control-sm" %> </div>
+    <div class="input-group">
+<p><%= f.text_field :updated_at_gteq, placeholder: "日付を選択", :class=>"form-control form-control-sm datetimepicker-input", id: "created_at_gteq", data: {toggle: "datetimepicker", target: "#created_at_gteq"} %></p>〜
+<p><%= f.text_field :updated_at_lteq, placeholder: "日付を選択", :class=>"form-control form-control-sm datetimepicker-input", id: "created_at_lteq", data: {toggle: "datetimepicker", target: "#created_at_lteq"} %></p>
+    <%= f.submit "検索", :class=> "input-group-append btn btn-success btn-sm btn-block" %>
+    </div>
+<% end %>
+</div>
+<%= render 'layouts/flash_messages' %>
+<% if @blogs.any? %>
+<% @blogs.each do |blog| %>
+  <div class="indexcard">
+    <div class="meta align-self-stretch"><%= blog.id %></div>
+      <div class="indexcontent">
+      <ul>
+      <div class="titlecontent">
+       <li><div class="card-title indextitle"><%= link_to blog.title.truncate(10), blog_path(blog.id) %></div></li>
+        <li><div class="indexnaiyou"><%= blog.content.truncate(10) %></div></li>
+        </div>
+        <div class="dateuser">
+        <li><div class="comment">最終更新：<%= blog.updated_at.to_s(:datetime) %></div></li>
+        <li> <%= blog.user.name %></li>
+        <li>
+          <% if  blog.user.avatar? %>
+          <%= image_tag blog.user.avatar.url, class: 'avatar_present_img' %>
+          <% else %>
+          <%= image_tag 'no_avatar.jpg', class: 'avatar_present_img' %>
+          <% end %>
+        </li>
+        </div>
+      </ul>
+    </div>
   </div>
 <% end %>
-<% if @blogs.any? %>
-<table class="table table-hover">
-<thead>
-<tr>
-<th>ID</th>
-<th>タイトル</th>
-<th>内容</th>
-<th>更新日時</th>
-<th>投稿者</th>
-</tr>
-</thead>
-<tbody>
-<% @blogs.each do |blog| %>
-    <tr>
-     <th scope="row" class="idtable"><%= blog.id %></th>
-    <td><%= link_to blog.title.truncate(20), blog_path(blog.id) %></td>
-    <td><%= link_to blog.content.truncate(20), blog_path(blog.id) %></td>
-    <td class="datetable"><div class="comment"><%= blog.updated_at.to_s(:datetime) %></div></td>
-    <td><%= blog.user.name %></td>
-    </tr>
-    </tbody>
-    <% end %>
-    <% else %>
+<% else %>
+  <div class="kaijo">
  検索結果はありません。
-    <% end %>
-    </table>
-    <%= paginate(@blogs) %>
+  </div>
+<% end %>
+<div class="kaijo">
+<%= paginate(@blogs) %>
+</div>
     </div>

@@ -8,7 +8,8 @@ class CommentsController < ApplicationController
             redirect_to blog_path(@blog)
         else
             flash[:danger] = "コメントできませんでした"
-            render :show
+            redirect_to blog_path(params[:blog_id])
+            #render :show/:id(params[:blog_id])
         end
     end
 

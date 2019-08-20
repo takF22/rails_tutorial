@@ -1,10 +1,26 @@
 <h1 class="title">記事詳細</h1>
+<% if @blog.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @blog.errors.full_messages.each do |msg| %>
+      <li class="danger"><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 <div class ="container">
 <div align="right">記事ナンバー:<%= @blog.id %></div>
 <div class="taitoru"><h2><%= @blog.title %></h2></div>
 <div class="naiyou"><%= @blog.content %></div>
 <div><%= image_tag @blog.img.url if @blog.img? %></div>
-<div align="right">投稿者：<%= @user.name %></div>
+<div align="right">
+  投稿者：<%= @user.name %>
+  <% if  @user.avatar? %>
+          <%= image_tag @user.avatar.url, class: 'avatar_present_img' %>
+          <% else %>
+          <%= image_tag 'no_avatar.jpg', class: 'avatar_present_img' %>
+  <% end %>
+</div>
 
 <% if @blog.user_id  == current_user.id.to_s %>
 <%= link_to "編集", edit_blog_path,class:"btn btn-info" %>
@@ -21,7 +37,6 @@
 <thead>
 <tr>
 <th>コメント</th>
-<th>投稿日時</th>
 <th>投稿者</th>
 <th></th>
 </tr>
@@ -30,9 +45,14 @@
     <% @comments.includes(:user).each do |comment| %>
         <% #コメントの内容 %>
         <tr>
-        <td class="comcontainer"><%= comment.body %><%= comment.updated_at.to_s(:datetime) %></td>
-        <td class="comment"><%= comment.updated_at.to_s(:datetime) %></td>
-        <td><%= comment.user.name %></td>
+        <td class="comcontainer"><%= comment.body %><div class="comment" text-right><%= comment.updated_at.to_s(:datetime) %></div></td>
+        <td><%= comment.user.name %>
+         <% if  comment.user.avatar? %>
+          <%= image_tag comment.user.avatar.url, class: 'avatar_present_img' %>
+          <% else %>
+          <%= image_tag 'no_avatar.jpg', class: 'avatar_present_img' %>
+         <% end %>
+        </td>
         <td>
           <% if @blog.user_id  == current_user.id.to_s || comment.user_id  == current_user.id %>
           <%= link_to "削除",
@@ -51,7 +71,7 @@
 </table>
 <div class="container"><%= paginate(@comments) %></div>
 <div class="container">
-<h5>コメントを追加する</h5>
+<h5>コメントを追加する<span class="comment">※最大500文字</span></h5>
 <%= form_for ([@blog, @blog.comments.build]) do |f| %>
       <%= f.text_area :body, cols: 60, rows: 5 %>
       <%= f.hidden_field :blog_id, :value => @blog.id %>

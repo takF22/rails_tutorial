@@ -5,6 +5,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+  <script type="text/javascript" src="bootstrap-datepicker/locales/bootstrap-datepicker.ja.min.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <!--[if lt IE 9]>
@@ -25,6 +31,13 @@
         <% if user_signed_in? %>
         <li class="header_link"><%= link_to_unless_current "ログアウト", destroy_user_session_path, method: :delete %></li>
         <li class="header_link"><%= link_to_unless_current "ユーザー情報変更", edit_user_registration_path %></li>
+        <li>
+            <% if current_user.persisted? && current_user.avatar? %>
+          <%= image_tag current_user.avatar.url, class: 'avatar_present_img' %>
+          <% else %>
+          <%= image_tag 'no_avatar.jpg', class: 'avatar_present_img' %>
+          <% end %>
+        </li>
         <li class="header_link text-info "><%= current_user.name %>でログイン中</li>
         <% else %>
         <li class="header_link"><%= link_to_unless_current "ログイン", new_user_session_path %></li>

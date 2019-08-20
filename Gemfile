@@ -72,3 +72,6 @@ gem 'kaminari'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'rmagick'
+gem "bootstrap4-datetime-picker-rails"
+gem 'momentjs-rails'
+gem "font-awesome-rails"

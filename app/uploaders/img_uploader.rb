@@ -28,15 +28,16 @@ class ImgUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
   # Create different versions of your uploaded files:
-    version :thumb do
+  version :thumb do
      process resize_to_fit: [50, 50]
      #process resize_to_limit: [400, 250, "#ffffff", "Center"]
      # thumb.jpg という固定ファイル名で作成 ( full_filename メソッドをオーバーライド )
-  def full_filename for_file
-    "thumb.jpg"
+      def full_filename for_file
+        "thumb.jpg"
+      end
   end
-end
-#ファイルサイズ上限設定
+
+    #ファイルサイズ上限設定
   def size_range
     1..3.megabytes
   end

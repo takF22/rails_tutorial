@@ -17,6 +17,10 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require tempusdominus-bootstrap-4.js
+//= require moment
+//= require moment/ja.js
+//= require tempusdominus-bootstrap-4.js
 $(function(){
     setTimeout("$('.time-limit').fadeOut('slow')", 3000) 
   })
@@ -45,3 +49,42 @@ $(function(){
       reader.readAsDataURL(file);
     });
   });
+  $(function(){
+    jQuery('created_at_gteq').datetimepicker(
+      {
+        weekStart:0,
+        lang:"ja",
+        format:"YYYY-MM-DD HH:mm"
+        });
+});
+$(function(){
+  jQuery('created_at_lteq').datetimepicker()
+});
+
+//アバタープレビュー
+$( document ).on('turbolinks:load', function() {
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+ 
+      reader.onload = function (e) {
+        $('#avatar_img_prev').attr({
+          src: e.target.result,
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          box-shadow: 0 3px 7px -1px rgba(#000, .10);
+          object-fit: cover;
+          margin:10px;
+        });
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+ 
+  $("#post_img").change(function(){
+    $('#avatar_img_prev').removeAttr('style');
+    $('.avatar_present_img').remove();
+    readURL(this);
+  });
+});

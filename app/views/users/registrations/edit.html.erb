@@ -29,15 +29,27 @@
       <div class="description"><%= @minimum_password_length %>文字以上</div>
     <% end %>
   </div>
-
   <div class="field">
     <%= f.label :password_confirmation, "パスワード確認" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div><br>
-  <div class="actions text-center">
-    <%= f.submit "更新する", :class=>"btn btn-primary" %>
-  </div>
+<!-- アバターを設定する -->
+<h5>アイコンを設定</h5>
+  <img id="avatar_img_prev" src="#" style="visibility:hidden" >
+  <div class="circle-avatar">
+  <% if current_user.persisted? && current_user.avatar? %>
+    <%= image_tag current_user.avatar.url, class: 'avatar_present_img' %>
+    <label><%= f.check_box :remove_avatar %> 画像を削除</label>
+  <% else %>
+    <%= image_tag 'no_avatar.jpg', class: 'avatar_present_img' %>
+  <% end %>
+    <%= f.file_field :avatar, id: 'post_img' %>
+</div>
+<br>
+<div class="actions text-center">
+<%= f.submit "更新する", :class=>"btn btn-primary" %>
 <% end %>
+</div>
 <br>
 <h3>アカウント削除</h3>
 １度消すと戻せません。
@@ -48,7 +60,7 @@ data: { confirm: "本当に削除しますか？" },
 method: :delete,
 class:"btn btn-danger" %>
 <br>
-<%= link_to "戻る", :back %></div>
+<%= link_to "トップへ戻る", root_path %></div>
 </div>
 </div>
 </div>

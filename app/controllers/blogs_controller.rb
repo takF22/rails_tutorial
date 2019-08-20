@@ -3,7 +3,8 @@ class BlogsController < ApplicationController
   def index
     #@blogs = Blog.all.order(created_at: "desc")
     @q = Blog.ransack(params[:q])
-    @blogs = @q.result.page(params[:page]).per(10).order(created_at: "desc")
+    @blogs = @q.result.page(params[:page]).per(10).order(updated_at: "desc")
+    #binding.pry
   # @q = Blog.ransack(params[:q])
    # @result = @q.result(distinct: true)
    # if params[:q].present?

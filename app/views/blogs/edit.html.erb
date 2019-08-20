@@ -1,21 +1,39 @@
 <h1 class="title">記事編集</h1>
+<% if @blog.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+    <% @blog.errors.full_messages.each do |msg| %>
+      <li class="danger"><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 <div class="conatiner w-75 p-3">
 <%= render 'layouts/flash_messages' %>
+<span class="text-danger">※</span>は必須項目
 <%= form_for @blog, url:blog_path(@blog) do |f| %>
-    <p class="text-secondary">
-      <%= f.label :title, "タイトル" %><br>
+    <p>
+    <span class="text-danger">※</span><%= f.label :title, "タイトル" %><span class="comment">最大100文字</span><br>
       <%= f.text_field :title %>
     </p>
    
-    <p class="text-secondary">
-      <%= f.label :content, "内容" %><br>
+    <p>
+    <span class="text-danger">※</span><%= f.label :content, "内容" %><span class="comment">最大1000文字</span><br>
       <%= f.text_area :content, cols: 60, rows: 8 %>
     </p>
 
-    <p class="text-secondary">
+    <p>
     <%= f.label :画像 %><br>
-    <%= f.file_field :img %>
+    <div id="img_field", style: "word-wrap: break-word;" onClick="$('#file').click()" >
+    <% if @blog.img.url.present? %>
+    <%= image_tag(@blog.img.url) %>
+        <% else %>
+        <i class="fa-image">クリックして画像を追加</i><i class=" fa-file-upload add"></i>
+        <% end %>
+    </div>
+    <%= f.file_field :img, style: "display:none;", id: 'file'%>
     </p>
+    <p class="comment">拡張子はjpg、jpeg、gif、pngのみ可能です。サイズ上限：3MB</p>
     <p><%= f.check_box :remove_img %>画像を削除する</p>
     <p>
     <input type="submit" value="送信" class="btn btn-primary">
