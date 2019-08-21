@@ -2,83 +2,87 @@
 <% if @blog.errors.any? %>
   <div id="error_explanation">
     <ul>
-    <% @blog.errors.full_messages.each do |msg| %>
+      <% @blog.errors.full_messages.each do |msg| %>
       <li class="danger"><%= msg %></li>
     <% end %>
     </ul>
   </div>
 <% end %>
-<div class ="container">
-<div align="right">記事ナンバー:<%= @blog.id %></div>
-<div class="taitoru"><h2><%= @blog.title %></h2></div>
-<div class="naiyou"><%= @blog.content %></div>
-<div><%= image_tag @blog.img.url if @blog.img? %></div>
-<div align="right">
-  投稿者：<%= @user.name %>
-  <% if  @user.avatar? %>
-          <%= image_tag @user.avatar.url, class: 'avatar_present_img' %>
-          <% else %>
-          <%= image_tag 'no_avatar.jpg', class: 'avatar_present_img' %>
-  <% end %>
-</div>
 
-<% if @blog.user_id  == current_user.id.to_s %>
-<%= link_to "編集", edit_blog_path,class:"btn btn-info" %>
-<%= link_to "削除",
- blog_path,
- method: :delete,
- class:"btn btn-danger",
- data: {confirm: "この記事を本当に削除しますか？"} %>
- <% end %>
-</div><br><br>
-<% #コメントがあったら %>
-<table class="table container">
-<% if @comments.any? %>
-<thead>
-<tr>
-<th>コメント</th>
-<th>投稿者</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-    <% @comments.includes(:user).each do |comment| %>
-        <% #コメントの内容 %>
+<div class ="container">
+  <div align="right">記事ナンバー:<%= @blog.id %></div>
+  <div class="taitoru"><h2><%= @blog.title %></h2></div>
+  <div class="naiyou"><%= @blog.content %></div>
+  <div><%= image_tag @blog.img.url if @blog.img? %></div>
+  <div align="right">
+    投稿者：<%= @blog.user.name %>
+      <% if  @blog.user.avatar? %>
+        <%= image_tag @blog.user.avatar.url, class: 'avatar_present_img' %>
+      <% else %>
+        <%= image_tag 'no_avatar.jpg', class: 'avatar_present_img' %>
+      <% end %>
+  </div>
+  <div>
+    <% if @blog.user_id  == current_user.id.to_s %>
+      <%= link_to "編集", edit_blog_path,class:"btn btn-info" %>
+      <%= link_to "削除",
+        blog_path,
+        method: :delete,
+        class:"btn btn-danger",
+        data: {confirm: "この記事を本当に削除しますか？"} %>
+    <% end %>
+  </div>
+  <br>
+  <br>
+  <% #コメントがあったら %>
+  <table class="table container">
+    <% if @comments.present? %>
+      <thead>
         <tr>
-        <td class="comcontainer"><%= comment.body %><div class="comment" text-right><%= comment.updated_at.to_s(:datetime) %></div></td>
-        <td><%= comment.user.name %>
-         <% if  comment.user.avatar? %>
-          <%= image_tag comment.user.avatar.url, class: 'avatar_present_img' %>
-          <% else %>
-          <%= image_tag 'no_avatar.jpg', class: 'avatar_present_img' %>
-         <% end %>
-        </td>
-        <td>
-          <% if @blog.user_id  == current_user.id.to_s || comment.user_id  == current_user.id %>
-          <%= link_to "削除",
-          blog_comment_path(@blog, comment),
-          method: :delete,
-          class:"btn btn-danger",
-          data: {confirm: "コメントを削除します"} %>
-          <% end %>
-        </td>
- <% end %>
-    <% else %>
+          <th>コメント</th>
+          <th>投稿者</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @comments.each do |comment| %>
+          <% #コメントの内容 %>
+            <tr>
+              <td class="comcontainer"><%= comment.body %><div class="comment" text-right><%= comment.updated_at.to_s(:datetime) %></div></td>
+              <td><%= comment.user.name %>
+              <% if  comment.user.avatar? %>
+                <%= image_tag comment.user.avatar.url, class: 'avatar_present_img' %>
+                <% else %>
+                <%= image_tag 'no_avatar.jpg', class: 'avatar_present_img' %>
+              <% end %>
+              </td>
+              <td>
+                <% if @blog.user_id  == current_user.id.to_s || comment.user_id  == current_user.id %>
+                  <%= link_to "削除",
+                    blog_comment_path(@blog, comment),
+                    method: :delete,
+                    class:"btn btn-danger",
+                    data: {confirm: "コメントを削除します"} %>
+                <% end %>
+              </td>
+            </tr>
+        </tbody>
+    <% end %>
+  </table>
+  <% else %>
     <div class="container">コメントはありません</div>
-<% end %>
-</tr>
-</tbody>
-</table>
+  <% end %>
+  
 <div class="container"><%= paginate(@comments) %></div>
 <div class="container">
-<h5>コメントを追加する<span class="comment">※最大500文字</span></h5>
-<%= form_for ([@blog, @blog.comments.build]) do |f| %>
-      <%= f.text_area :body, cols: 60, rows: 5 %>
-      <%= f.hidden_field :blog_id, :value => @blog.id %>
-      <%= f.hidden_field :user_id, :value => current_user.id %>
+  <h5>コメントを追加する<span class="comment">※最大500文字</span></h5>
+  <%= form_for ([@blog, @blog.comments.build]) do |f| %>
+    <%= f.text_area :body, cols: 60, rows: 5 %>
+    <%= f.hidden_field :blog_id, :value => @blog.id %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
     <p>
-    <%= f.submit "コメントする", :class=>"btn btn-primary" %>
+      <%= f.submit "コメントする", :class=>"btn btn-primary" %>
     </p>
   <% end %>
-<%= link_to "戻る", blogs_path, class:"btn btn-link" %>
+  <%= link_to "戻る", :back, class:"btn btn-link" %>
 </div>

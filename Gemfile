@@ -75,3 +75,5 @@ gem 'rmagick'
 gem "bootstrap4-datetime-picker-rails"
 gem 'momentjs-rails'
 gem "font-awesome-rails"
+gem 'bullet'
+gem 'bootstrap-datetimepicker-rails'
